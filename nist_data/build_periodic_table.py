@@ -183,20 +183,20 @@ access_date = str(datetime.datetime.utcnow())
 
 atomic_weights_data = requests.get(url).json()
 
-output = '''
+output = f'''
 """
-This is a automatically generated file from the {0} NIST atomic weights.
-Title: {1}
-Date: {2}
-DOI: {3}
-URL: {4}
-Access Date: {5} UTC
+This is a automatically generated file from the {year} NIST atomic weights.
+Title: {title}
+Date: {date_modified}
+DOI: {doi}
+URL: {url}
+Access Date: {access_date} UTC
 
 File Authors: QCElemental Authors
 """
 
 
-'''.format(year, title, date_modified, doi, url, access_date)
+'''
 
 atomic_weights_json = {"title": title, "date": date_modified, "doi": doi, "url": url, "access_data": access_date}
 
@@ -235,8 +235,10 @@ for delem in atomic_weights_data['data']:
         if mobj:
             mass = mobj.group('value')
         else:
-            raise ValueError('Trouble parsing mass string ({}) for element ({})'.format(
-                diso['Relative Atomic Mass'], diso['Atomic Symbol']))
+            raise ValueError(
+                f"Trouble parsing mass string ({diso['Relative Atomic Mass']})"
+                f" for element ({diso['Atomic Symbol']})"
+            )
 
         a = int(diso['Mass Number'])
 
@@ -291,10 +293,10 @@ atomic_weights_json["_EE"] = _EE
 atomic_weights_json["EA"] = EA
 atomic_weights_json["A"] = A
 atomic_weights_json["mass"] = masses
-output += "nist_{}_atomic_weights = {}".format(year, json.dumps(atomic_weights_json))
+output += f"nist_{year}_atomic_weights = {json.dumps(atomic_weights_json)}"
 
 # output = FormatCode(output)[0]
 
-fn = "nist_{}_atomic_weights.py".format(year)
+fn = f"nist_{year}_atomic_weights.py"
 with open(fn, "w") as handle:
     handle.write(output)

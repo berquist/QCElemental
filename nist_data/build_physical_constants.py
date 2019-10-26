@@ -20,20 +20,20 @@ access_date = str(datetime.datetime.utcnow())
 
 constants = requests.get(url).json()
 
-output = '''
+output = f'''
 """
-This is a automatically generated file from the {0} NIST fundamental constants.
-Title: {1}
-Date: {2}
-DOI: {3}
-URL: {4}
-Access Date: {5} UTC
+This is a automatically generated file from the {year} NIST fundamental constants.
+Title: {title}
+Date: {date_modified}
+DOI: {doi}
+URL: {url}
+Access Date: {access_date} UTC
 
 File Authors: QCElemental Authors
 """
 
 
-'''.format(year, title, date_modified, doi, url, access_date)
+'''
 
 constants_json = {
     "title": title,
@@ -56,10 +56,10 @@ for pc in constants['constant']:
         "value": value.replace(" ", ""),
         'uncertainty': uncertainty
     }
-output += "nist_{}_codata = {}".format(year, constants_json)
+output += f"nist_{year}_codata = {constants_json}"
 
 output = FormatCode(output)
 
-fn = "nist_{}_codata.py".format(year)
+fn = f"nist_{year}_codata.py"
 with open(fn, "w") as handle:
     handle.write(output[0])
