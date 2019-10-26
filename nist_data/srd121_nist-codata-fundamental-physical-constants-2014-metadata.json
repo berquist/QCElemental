@@ -16,18 +16,18 @@
         "description":
         "CODATA Internationally recommended 2014 values of the Fundamental Physical Constants expressed in JSON.",
         "downloadURL":
-        "http://www.nist.gov/srd/srd_data/srd121_allascii_2014.json",
+        "https://www.nist.gov/srd/srd_data/srd121_allascii_2014.json",
         "mediaType":
         "application/json"
     }, {
         "description":
         "CODATA Internationally recommended 2014 values of the Fundamental Physical Constants expressed in ascii text.",
         "downloadURL":
-        "http://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+        "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
         "mediaType":
         "text/plain"
     }, {
-        "accessURL": "https://dx.doi.org/10.18434/T4WW24",
+        "accessURL": "https://doi.org/10.18434/T4WW24",
         "mediaType": "text/html"
     }],
     "identifier":
